@@ -43,3 +43,9 @@ def add_mijoz(s: MijozIn):
             "INSERT INTO mijozlar (phone, paroll) VALUES (%s, %s) RETURNING id, phone, paroll",
             (s.phone, s.paroll),
         ).fetchone()
+@app.get("/oshxonalar")
+def list_oshxonalar():
+    with get_conn() as conn:
+        return conn.execute(
+            "SELECT id, name FROM oshxonalar ORDER BY id"
+        ).fetchall()        
